@@ -11,7 +11,7 @@
 <body>
 
     <div class="grid-wrapper">
-        <div class="btn">
+        <div class="btn" id="add-book">
             <button class="add-book">Add book</button>
         </div>
         <div class="grid-container">
@@ -41,7 +41,7 @@
     </div>
 
     <!--POP-UP FORM-->
-    <div class="form-container">
+    <div id="form-container" class="invisible-form">
         <form action="https://httpbin.org/post" method="post">
             <h1>Add Book</h1>
             <p>
@@ -71,5 +71,7 @@
             <button type="submit" id="submit">Submit</button>
         </form>
     </div>
+
+    <script src="script.js"></script>
 </body>
 </html>

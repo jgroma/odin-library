@@ -93,12 +93,15 @@ li {
 
 /*POP-UP FORM*/
 
-.form-container {
+#form-container {
     /* display: none; to hide the form*/
-    display: none;
     position: fixed;
     top: 10%;
     left: 40%;
+}
+
+.invisible-form {
+    display: none;
 }
 
 form {
