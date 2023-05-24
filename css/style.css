@@ -32,7 +32,7 @@ body {
    border: 2px solid saddlebrown
 }
 
-.grid-container {
+#grid-container {
     background-color: burlywood;
     display: grid;
     width: 80%;
@@ -94,12 +94,12 @@ li {
 /*POP-UP FORM*/
 
 #form-container {
-    /* display: none; to hide the form*/
     position: fixed;
     top: 10%;
     left: 40%;
 }
 
+/*to hide the form*/
 .invisible-form {
     display: none;
 }
@@ -121,4 +121,9 @@ form>h1 {
 
 form>button {
     width: 100px;
+}
+
+.test-div {
+    position: fixed;
+    top: 20%;
 }

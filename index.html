@@ -14,7 +14,7 @@
         <div class="btn" id="add-book">
             <button class="add-book">Add book</button>
         </div>
-        <div class="grid-container">
+        <div id="grid-container">
             <div class="card">
                 <h1 class="title">The Hobbit</h1>
                 <ul>
@@ -62,10 +62,10 @@
             </p>
             <p>
                 <label for="status">Status</label>
-                <select name="status" id="status">
-                    <option value="read">Read</option>
-                    <option value="currently-reading">Currently Reading</option>
-                    <option value="tbr">Want To Read</option>
+                <select name="status" id="status" value="TBR">
+                    <option value="Read">Read</option>
+                    <option value="Currently reading">Currently Reading</option>
+                    <option value="TBR">Want To Read</option>
                 </select>
             </p>
             <button type="submit" id="submit">Submit</button>

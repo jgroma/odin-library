@@ -1,7 +1,30 @@
-const addBtn = document.getElementById("add-book")
-const formContainer = document.getElementById("form-container")
-const submitBtn = document.getElementById("submit")
-const form = document.getElementsByTagName("form")
+//variables
+const addBtn = document.getElementById("add-book");
+const formContainer = document.getElementById("form-container");
+const submitBtn = document.getElementById("submit");
+const form = document.getElementsByTagName("form");
+const gridContainer = document.getElementById("grid-container");
+
+//POP-UP FORM
+function showForm () {
+    formContainer.classList.remove("invisible-form");
+};
+
+addBtn.addEventListener("click", function () {
+    showForm()
+});
+
+function hideForm () {
+    formContainer.classList.add("invisible-form");
+
+};
+
+submitBtn.addEventListener("click", function() {
+    //stop form submission
+    event.preventDefault();
+    hideForm()
+    addBookToLibrary();
+});
 
 //FORM DATA
 let title;
@@ -18,11 +41,12 @@ function getFormData() {
     status = document.getElementById("status").value
   }
 
+
 let myLibrary = [];
 
-
+//book object constructor
 function Book(title, author, pages, year, status) {
-    //the constructor
+
     this.title = title
     this.author = author || "Unknown"
     this.pages = pages || "Unknown"
@@ -31,31 +55,100 @@ function Book(title, author, pages, year, status) {
 
 };
 
-
+//adds new book object to myLibrary array
 function addBookToLibrary() {
     getFormData();
     const book = new Book(title, author, pages, year, status);
-    //console.table(book);
-    myLibrary.push(book);
+    if (title != "") {
+        myLibrary.push(book);
+        displayCards(myLibrary);
+    } else {
+        alert("Book title is required.")
+    };
 };
 
-//POP-UP FORM
-function showForm () {
-    formContainer.classList.remove("invisible-form");
+//iterates through myLibrary array 
+//to make and display cards for all objects
+function displayCards(array) {
+    //to avoid duplicating book cards
+    gridContainer.innerHTML = "";
+
+    for (let i = 0; i < array.length; i++) {
+        makeCard(array[i]);
+    }
+
+
 };
 
-addBtn.addEventListener("click", function () {
-    showForm()
-});
+//make a card for each object
+function makeCard(book) {
 
-function hideForm () {
-    formContainer.classList.add("invisible-form");
+            const card = document.createElement("div");
+            card.classList.add("card");
+            gridContainer.appendChild(card)
+
+            const header = document.createElement("h1");
+            header.classList.add("title");
+            header.textContent = book.title;
+            card.appendChild(header)
+
+            const ul = document.createElement("ul");
+            card.appendChild(ul);
+
+            const liAuthor = document.createElement("li");
+            ul.appendChild(liAuthor);
+            const authorLabel = document.createElement("p");
+            authorLabel.textContent = "Author";
+            const authorData = document.createElement("p");
+            authorData.classList.add("author");
+            authorData.textContent = book.author;
+            liAuthor.appendChild(authorLabel);
+            liAuthor.appendChild(authorData);
+
+            const liPages = document.createElement("li");
+            ul.appendChild(liPages);
+            const pagesLabel = document.createElement("p");
+            pagesLabel.textContent = "Pages";
+            const pagesData = document.createElement("p");
+            pagesData.classList.add("pages");
+            pagesData.textContent = book.pages;
+            liPages.appendChild(pagesLabel);
+            liPages.appendChild(pagesData);
+
+            const liYear = document.createElement("li");
+            ul.appendChild(liYear);
+            const yearLabel = document.createElement("p");
+            yearLabel.textContent = "Year";
+            const yearData = document.createElement("p");
+            yearData.classList.add("year");
+            yearData.textContent = book.year;
+            liYear.appendChild(yearLabel);
+            liYear.appendChild(yearData);
+
+            const liStatus = document.createElement("li");
+            ul.appendChild(liStatus);
+            const statusLabel = document.createElement("p");
+            statusLabel.textContent = "Status";
+            const statusData = document.createElement("p");
+            statusData.classList.add("status");
+            statusData.textContent = book.status;
+            liStatus.appendChild(statusLabel);
+            liStatus.appendChild(statusData);
+
+            const deleteBtn = document.createElement("button");
+            deleteBtn.textContent = "Delete"
+            deleteBtn.classList.add("delete");
+            card.appendChild(deleteBtn);
+
 };
 
-submitBtn.addEventListener("click", function() {
-    //stop form submission
-    event.preventDefault();
-    hideForm()
-    addBookToLibrary();
-});
 
+function deleteBook() {
+    //function to delete book
+
+};
+
+function toggleStatus() {
+    //function to change read status
+
+};
