@@ -11,6 +11,7 @@ function showForm () {
 };
 
 addBtn.addEventListener("click", function () {
+    form[0].reset()
     showForm()
 });
 
@@ -22,7 +23,7 @@ function hideForm () {
 submitBtn.addEventListener("click", function() {
     //stop form submission
     event.preventDefault();
-    
+
     hideForm()
     addBookToLibrary();
 });
@@ -52,7 +53,7 @@ function Book(title, author, pages, year, status) {
     this.author = author || "Unknown"
     this.pages = pages || "Unknown"
     this.year = year  || "Unknown"
-    this.status = status
+    this.status = status;
 
 };
 
@@ -63,21 +64,24 @@ function addBookToLibrary() {
     if (title != "") {
         myLibrary.push(book);
         displayCards(myLibrary);
+        //form.reset()
     } else {
         alert("Book title is required.")
     };
 };
 
-//iterates through myLibrary array 
-//to make and display cards for all book objects
+/*iterates through myLibrary array 
+to make and display cards for all book objects*/
 function displayCards(array) {
     //to avoid duplicating book cards
     gridContainer.innerHTML = "";
 
     for (let i = 0; i < array.length; i++) {
         makeCard(array[i]);
+        //clearForm();
 
     }
+
 };
 
 //make a card for each object
@@ -85,6 +89,7 @@ function makeCard(book) {
 
             const card = document.createElement("div");
             card.classList.add("card");
+            //console.log(Object.getPrototypeOf(book))
             gridContainer.appendChild(card)
 
             const header = document.createElement("h1");
@@ -126,18 +131,44 @@ function makeCard(book) {
             liYear.appendChild(yearData);
 
             const liStatus = document.createElement("li");
+            liStatus.classList.add("status-container")
             ul.appendChild(liStatus);
             const statusLabel = document.createElement("p");
             statusLabel.textContent = "Status";
-            const statusData = document.createElement("p");
-            statusData.classList.add("status");
-            statusData.textContent = book.status;
+            //const statusData = document.createElement("p");
+            //statusData.classList.add("status");
+            //statusData.textContent = book.status;
             liStatus.appendChild(statusLabel);
-            liStatus.appendChild(statusData);
+            //liStatus.appendChild(statusData);
+            const statusBtnContainer = document.createElement("p");
+            liStatus.appendChild(statusBtnContainer);
+
+            const statusBtn = document.createElement("button");
+            statusBtn.classList.add("status-btn")
+            statusBtn.textContent = book.status
+            statusBtnContainer.appendChild(statusBtn);
+
+            //changes read status of both the book object and card
+            book.toggleButton = function () {
+                if (book.status === "Read") {
+                    book.status = "TBR"
+                    //statusData.textContent = book.status
+                    statusBtn.textContent = "TBR"
+                } else {
+                    book.status = "Read"
+                    //statusData.textContent = book.status
+                    statusBtn.textContent = "Read"
+                };
+                
+            };
+
+            statusBtn.addEventListener("click", function () {
+                book.toggleButton();
+            })
 
             const deleteBtn = document.createElement("button");
             deleteBtn.textContent = "Delete"
-            deleteBtn.classList.add("delete");
+            deleteBtn.classList.add("delete-btn");
             card.appendChild(deleteBtn);
 
 
@@ -151,7 +182,16 @@ function makeCard(book) {
 
 };
 
-function toggleStatus() {
-    //function to change read status
+//FORM VALIDATION
+//doesn't work yet
+let currentYear = new Date().getFullYear();
+//let stringCurrentYear = currentYear.toString();
 
-};
+const yearInput = document.getElementById("year");
+yearInput.setAttribute("max", currentYear);
+
+/*this would cause a bug preventing the user from typing a higher digit
+for every digit in the currenYear number (2023, so the 1st number
+cannot be higher than 2, 2nd than 0, 3rd than 2, 4th than 4)*/
+
+//yearInput.setAttribute("onkeyup", "if(value>max) value=0;");

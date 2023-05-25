@@ -81,13 +81,15 @@ li {
     grid-gap: 20px;
 }
 
-.card>button {
-    grid-column: 2 / 3;
-    grid-row: 3 / 4;
-    place-self: end;
 
-    height: 30px;
-    width: 60px;
+.status-container {
+ 
+    align-items: center;
+
+}
+
+.status-container p {
+    display: inline-block;
 }
 
 
