@@ -1,4 +1,4 @@
-//variables
+//DOM element variables
 const addBtn = document.getElementById("add-book");
 const formContainer = document.getElementById("form-container");
 const submitBtn = document.getElementById("submit");
@@ -22,6 +22,7 @@ function hideForm () {
 submitBtn.addEventListener("click", function() {
     //stop form submission
     event.preventDefault();
+    
     hideForm()
     addBookToLibrary();
 });
@@ -68,16 +69,15 @@ function addBookToLibrary() {
 };
 
 //iterates through myLibrary array 
-//to make and display cards for all objects
+//to make and display cards for all book objects
 function displayCards(array) {
     //to avoid duplicating book cards
     gridContainer.innerHTML = "";
 
     for (let i = 0; i < array.length; i++) {
         makeCard(array[i]);
+
     }
-
-
 };
 
 //make a card for each object
@@ -140,11 +140,14 @@ function makeCard(book) {
             deleteBtn.classList.add("delete");
             card.appendChild(deleteBtn);
 
-};
 
-
-function deleteBook() {
-    //function to delete book
+            deleteBtn.addEventListener("click", function() {
+                //this removes the correct book object from the array
+                myLibrary.splice(myLibrary.indexOf(book), 1)
+                //this removes the correct card
+                card.remove();
+                console.table(myLibrary)
+            })
 
 };
 
