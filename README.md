@@ -9,5 +9,7 @@ Please note that "The Hobbit" book that you can see at the start is dummy conten
 <br>
 <br>
 #TO-DO:   
--CSS layout and color palette improvements
 -Form Validation
+
+#Credits:  
+-the CSS pattern is by [Temani Afif](https://css-pattern.com/)

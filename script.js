@@ -64,7 +64,6 @@ function addBookToLibrary() {
     if (title != "") {
         myLibrary.push(book);
         displayCards(myLibrary);
-        //form.reset()
     } else {
         alert("Book title is required.")
     };
@@ -78,7 +77,6 @@ function displayCards(array) {
 
     for (let i = 0; i < array.length; i++) {
         makeCard(array[i]);
-        //clearForm();
 
     }
 
@@ -89,7 +87,6 @@ function makeCard(book) {
 
             const card = document.createElement("div");
             card.classList.add("card");
-            //console.log(Object.getPrototypeOf(book))
             gridContainer.appendChild(card)
 
             const header = document.createElement("h1");
@@ -135,11 +132,7 @@ function makeCard(book) {
             ul.appendChild(liStatus);
             const statusLabel = document.createElement("p");
             statusLabel.textContent = "Status";
-            //const statusData = document.createElement("p");
-            //statusData.classList.add("status");
-            //statusData.textContent = book.status;
             liStatus.appendChild(statusLabel);
-            //liStatus.appendChild(statusData);
             const statusBtnContainer = document.createElement("p");
             liStatus.appendChild(statusBtnContainer);
 
@@ -152,11 +145,10 @@ function makeCard(book) {
             book.toggleButton = function () {
                 if (book.status === "Read") {
                     book.status = "TBR"
-                    //statusData.textContent = book.status
+                    
                     statusBtn.textContent = "TBR"
                 } else {
                     book.status = "Read"
-                    //statusData.textContent = book.status
                     statusBtn.textContent = "Read"
                 };
                 
@@ -190,7 +182,7 @@ let currentYear = new Date().getFullYear();
 const yearInput = document.getElementById("year");
 yearInput.setAttribute("max", currentYear);
 
-/*this would cause a bug preventing the user from typing a higher digit
+/*the code below would cause a bug preventing the user from typing a higher digit
 for every digit in the currenYear number (2023, so the 1st number
 cannot be higher than 2, 2nd than 0, 3rd than 2, 4th than 4)*/
 
