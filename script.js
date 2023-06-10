@@ -46,16 +46,16 @@ function getFormData() {
 
 let myLibrary = [];
 
-//book object constructor
-function Book(title, author, pages, year, status) {
-
-    this.title = title
-    this.author = author || "Unknown"
-    this.pages = pages || "Unknown"
-    this.year = year  || "Unknown"
-    this.status = status;
-
-};
+//object constructor refactored to class syntax
+class Book {
+    constructor(title, author, pages, year, status) {
+      this.title = title
+      this.author = author || "Unknown"
+      this.pages = pages || "Unknown"
+      this.year = year  || "Unknown"
+      this.status = status;
+    }
+}
 
 //adds new book object to myLibrary array
 function addBookToLibrary() {
